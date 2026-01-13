@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import net.in.skylink.model.Employee;
+import net.in.skylink.attendance.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
@@ -16,7 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	Optional<Employee> findByEmailId(String emailId);
 	
-	Boolean existsByIsZohoIdAvailable(String employeeId);
+	Boolean existsByZohoIdAvailable(String employeeId);
 	
 	@Query("select e.zohoIdAvailable from Employee e where e.employeeId = :employeeId")
 	Boolean findZohoIdAvailabilityByEmployeeId(@Param("employeeId") String employeeId);

@@ -1,4 +1,4 @@
-package net.in.skylink.model;
+package net.in.skylink.attendance.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +28,7 @@ public class Employee {
 	
 	private String emailId;
 	
-	private Boolean isZohoIdAvailable;
+	private Boolean zohoIdAvailable;
 	
 	public long getId() {
 		return id;
@@ -90,12 +90,12 @@ public class Employee {
 		this.emailId = emailId;
 	}
 
-	public Boolean getIsZohoIdAvailable() {
-		return isZohoIdAvailable;
+	public Boolean getZohoIdAvailable() {
+		return zohoIdAvailable;
 	}
 
-	public void setIsZohoIdAvailable(Boolean isZohoIdAvailable) {
-		this.isZohoIdAvailable = isZohoIdAvailable;
+	public void setZohoIdAvailable(Boolean isZohoIdAvailable) {
+		this.zohoIdAvailable = isZohoIdAvailable;
 	}
 	
 	

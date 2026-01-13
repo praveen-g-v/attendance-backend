@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import net.in.skylink.attendance.exceptions.ServiceException;
+import net.in.skylink.attendance.model.User;
 import net.in.skylink.attendance.repository.UserRepository;
-import net.in.skylink.model.User;
 
 
 

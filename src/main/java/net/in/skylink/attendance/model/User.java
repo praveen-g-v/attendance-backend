@@ -1,4 +1,4 @@
-package net.in.skylink.model;
+package net.in.skylink.attendance.model;
 
 import java.util.Collection;
 import java.util.Date;

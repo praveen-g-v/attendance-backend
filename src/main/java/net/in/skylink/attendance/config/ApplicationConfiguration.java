@@ -28,10 +28,9 @@ public class ApplicationConfiguration {
 	    }
 
 	    @Bean
-	    UserDetailsPasswordService userDetailsService() {
-	        return (UserDetailsPasswordService) userService;
+	    public UserDetailsService userDetailsService() {
+	        return userService;
 	    }
-
 	    @Bean
 	    BCryptPasswordEncoder passwordEncoder() {
 	        return new PasswordManager(15).getPasswordEncoder();
@@ -42,11 +41,9 @@ public class ApplicationConfiguration {
 	        return config.getAuthenticationManager();
 	    }
 
-	    @SuppressWarnings("deprecation")
-		@Bean
+	    @Bean
 	    AuthenticationProvider authenticationProvider() {
-	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userService);
-	        authProvider.setUserDetailsPasswordService(userDetailsService());
+	        DaoAuthenticationProvider authProvider =  new DaoAuthenticationProvider(userService);
 	        authProvider.setPasswordEncoder(passwordEncoder());
 	        return authProvider;
 	    }

@@ -1,0 +1,39 @@
+package net.in.skylink.attendance.controller;
+
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.servlet.annotation.MultipartConfig;
+import net.in.skylink.attendance.exceptions.ServiceException;
+import net.in.skylink.attendance.model.Employee;
+import net.in.skylink.attendance.model.Response;
+import net.in.skylink.attendance.service.EmployeeService;
+
+
+@RestController
+public class EmployeeController {
+	private EmployeeService employeeService;
+	
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService=employeeService;
+	}
+	
+	@PostMapping("/api/public/employee")
+    public Employee  createEmployee(@RequestBody Employee employee) throws ServiceException {
+        return employeeService.saveEmployee(employee);
+    }
+	
+	@PostMapping("/api/public/employees")
+	public List<Employee> importEployees(@RequestParam("file") MultipartFile file ){
+		return this.employeeService.importEmployee(file);
+	}
+}
