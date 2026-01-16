@@ -16,6 +16,8 @@ public class Employee {
 	
 	private String employeeId;
 	
+	private String trackwickid;
+	
 	private String fullName;
 	
 	private long contactNo;
@@ -30,6 +32,16 @@ public class Employee {
 	
 	private Boolean zohoIdAvailable;
 	
+	
+	
+	public String getTrackwickid() {
+		return trackwickid;
+	}
+
+	public void setTrackwickid(String trackwickid) {
+		this.trackwickid = trackwickid;
+	}
+
 	public long getId() {
 		return id;
 	}
