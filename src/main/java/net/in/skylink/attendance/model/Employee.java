@@ -1,5 +1,7 @@
 package net.in.skylink.attendance.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,10 @@ public class Employee {
 	private String emailId;
 	
 	private Boolean zohoIdAvailable;
+	
+	private Boolean resigned;
+	
+	private Date resignedDate;
 	
 	public long getId() {
 		return id;
@@ -97,9 +103,21 @@ public class Employee {
 	public void setZohoIdAvailable(Boolean isZohoIdAvailable) {
 		this.zohoIdAvailable = isZohoIdAvailable;
 	}
-	
-	
 
-	
+	public Boolean getResigned() {
+		return resigned;
+	}
+
+	public void setResigned(Boolean resigned) {
+		this.resigned = resigned;
+	}
+
+	public Date getResignedDate() {
+		return resignedDate;
+	}
+
+	public void setResignedDate(Date resignedDate) {
+		this.resignedDate = resignedDate;
+	}
 
 }

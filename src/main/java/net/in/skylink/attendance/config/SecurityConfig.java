@@ -58,7 +58,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000",         // Next.js dev
-                "http://localhost:3000/"         // fix for some browsers
+                "http://localhost:4200/"         // fix for some browsers
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

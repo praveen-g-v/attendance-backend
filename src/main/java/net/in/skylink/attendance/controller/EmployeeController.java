@@ -1,10 +1,12 @@
 package net.in.skylink.attendance.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.annotation.MultipartConfig;
 import net.in.skylink.attendance.exceptions.ServiceException;
+import net.in.skylink.attendance.model.ApiResponse;
 import net.in.skylink.attendance.model.Employee;
 import net.in.skylink.attendance.model.Response;
 import net.in.skylink.attendance.service.EmployeeService;
 
 
 @RestController
+
 public class EmployeeController {
 	private EmployeeService employeeService;
 	
@@ -35,5 +39,18 @@ public class EmployeeController {
 	@PostMapping("/api/public/employees")
 	public List<Employee> importEployees(@RequestParam("file") MultipartFile file ){
 		return this.employeeService.importEmployee(file);
+	}
+	
+	
+	@GetMapping("/api/public/employees")
+	public ApiResponse<List<Employee> >getEmployees( ){
+		
+		try {
+			List<Employee> employeesList=this.employeeService.getEmployees();
+			return new ApiResponse(true, "success", employeesList) ;
+		}
+		catch(Exception err) {
+			return new ApiResponse(false, "failure", new ArrayList<>()) ;
+		}
 	}
 }

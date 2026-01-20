@@ -35,6 +35,10 @@ public class EmployeeService {
 		return this.employeeRepository.save(employee);
 	}
 	
+	public List<Employee> getEmployees(){
+		return this.employeeRepository.findAll();
+	}
+	
 	private List<Employee>  readCsv(MultipartFile file) throws Exception {
 		
 		List<Employee> employees=new ArrayList();
