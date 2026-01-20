@@ -9,7 +9,7 @@ import net.in.skylink.attendance.model.ESSLAttendance;
 import net.in.skylink.attendance.model.Employee;
 public interface ESSLAttendanceRepository extends JpaRepository<ESSLAttendance, Long> {
 	
-	List<ESSLAttendance> findByEmployeeId(Long employeeId);
+	List<ESSLAttendance> findByEmployeeId(String employeeId);
 	
 	
 	List<ESSLAttendance> findByAttendanceDate(LocalDate date);

@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -33,23 +34,35 @@ public class EssLAttendanceService {
 	
 	private EmployeeRepository employeeRepository;
 	
+	private static final DataFormatter FORMATTER = new DataFormatter();
+
+	
 	public EssLAttendanceService(ESSLAttendanceRepository esslAttendanceRepository, EmployeeRepository employeeRepository) {
 		this.esslAttendanceRepository=esslAttendanceRepository;
 		this.employeeRepository=employeeRepository;
 	}
 	
 	
+//	
+//	private String getString(Cell cell) {
+//	    if (cell == null) return null;
+//	    System.out.println(cell.getCellType());
+//	    if (cell.getCellType() == CellType.STRING) {
+//	        return cell.getStringCellValue().trim();
+//	    }
+//	    if (cell.getCellType() == CellType.NUMERIC) {
+//	    	System.out.println(cell.getNumericCellValue());
+//	        return String.valueOf((long) cell.getNumericCellValue());
+//	    }
+//	    return null;
+//	}
+	
+	
+	
 	
 	private String getString(Cell cell) {
 	    if (cell == null) return null;
-
-	    if (cell.getCellType() == CellType.STRING) {
-	        return cell.getStringCellValue().trim();
-	    }
-	    if (cell.getCellType() == CellType.NUMERIC) {
-	        return String.valueOf((long) cell.getNumericCellValue());
-	    }
-	    return null;
+	    return FORMATTER.formatCellValue(cell).trim();
 	}
 
 	private long getLong(Cell cell) {
@@ -108,6 +121,7 @@ public class EssLAttendanceService {
 	    try (InputStream is = file.getInputStream();
 	         Workbook workbook = WorkbookFactory.create(is)) {
 	        Sheet sheet = workbook.getSheetAt(0);
+	        Sheet resultsheet=workbook.createSheet();
 	        List<String> headers=new ArrayList<String>();
 	        Row rowHeader=sheet.getRow(0);
 	        for(int i=0;i<rowHeader.getLastCellNum();i++) {
@@ -115,18 +129,22 @@ public class EssLAttendanceService {
 	        }
 
 	        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-	        	Row resultRow = sheet.createRow(i);
+	        	Row resultRow = resultsheet.createRow(i);
 	        	
 	        	resultRow.createCell(0).setCellValue(i);                     // S.No
 	        	
 	            Row row = sheet.getRow(i);
 	            if (row == null) continue;
 	            
+	            System.out.println(sheet.getLastRowNum());
+	            
 	            Employee tempEmployee=new Employee();
 	            try {
 	            	for(int j=0;j<headers.size();j++) {
 		            	if(headers.get(j).equalsIgnoreCase("E. Code")) {
 		            		String tempEmployeeId=getString(row.getCell(j));
+		            		
+		            		System.out.println("Employee Id "+tempEmployeeId+"  "+j );
 		            		resultRow.createCell(1).setCellValue(tempEmployeeId);        // Emp Code
 		            		tempEmployee=employeeRepository.findByEmployeeId(tempEmployeeId).orElseThrow(() -> new ServiceException("No Employee Found"));
 		            	}
