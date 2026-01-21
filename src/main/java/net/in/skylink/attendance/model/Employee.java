@@ -18,6 +18,8 @@ public class Employee {
 	
 	private String employeeId;
 	
+	private String trackwickid;
+	
 	private String fullName;
 	
 	private long contactNo;
@@ -31,11 +33,20 @@ public class Employee {
 	private String emailId;
 	
 	private Boolean zohoIdAvailable;
-	
+
 	private Boolean resigned;
 	
 	private Date resignedDate;
 	
+	public String getTrackwickid() {
+		return trackwickid;
+	}
+
+	public void setTrackwickid(String trackwickid) {
+		this.trackwickid = trackwickid;
+	}
+
+
 	public long getId() {
 		return id;
 	}
