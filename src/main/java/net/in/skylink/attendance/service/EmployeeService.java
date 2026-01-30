@@ -88,6 +88,9 @@ public class EmployeeService {
 		            		}
 		            		newEmployee.setEmailId(columns[i]);
 		            	}
+		            	else if(rowHeader.get(i).equalsIgnoreCase("trackwick id")) {
+		            		newEmployee.setTrackwickId(columns[i]);
+		            	}
 		            	else if(rowHeader.get(i).equalsIgnoreCase("is zoho")||rowHeader.get(i).equalsIgnoreCase("zoho id")) {
 		            		columns[i]=columns[i].trim();
 		            		if(!(columns[i].contains("true")||columns[i].contains("false"))) {

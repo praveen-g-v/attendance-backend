@@ -14,6 +14,11 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long>{
 	
 	Optional<Employee> findByEmployeeId(String employeeId);
 	
+	
+
+	Optional<Employee> findByTrackwickId(String trackwickId);
+
+	
 	Optional<Employee> findByEmailId(String emailId);
 	
 	Boolean existsByZohoIdAvailable(String employeeId);

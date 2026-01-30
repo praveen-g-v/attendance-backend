@@ -18,7 +18,7 @@ public class Employee {
 	
 	private String employeeId;
 	
-	private String trackwickid;
+	private String trackwickId;
 	
 	private String fullName;
 	
@@ -38,15 +38,14 @@ public class Employee {
 	
 	private Date resignedDate;
 	
-	public String getTrackwickid() {
-		return trackwickid;
+	public String getTrackwickId() {
+		return trackwickId;
 	}
 
-	public void setTrackwickid(String trackwickid) {
-		this.trackwickid = trackwickid;
+	public void setTrackwickId(String trackwickid) {
+		this.trackwickId = trackwickid;
 	}
-
-
+	
 	public long getId() {
 		return id;
 	}
