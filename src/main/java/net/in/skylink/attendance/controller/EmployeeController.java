@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +20,7 @@ import net.in.skylink.attendance.service.EmployeeService;
 
 
 @RestController
-
+@RequestMapping("/api/public/employee")
 public class EmployeeController {
 	private EmployeeService employeeService;
 	
@@ -26,18 +28,18 @@ public class EmployeeController {
 		this.employeeService=employeeService;
 	}
 	
-	@PostMapping("/api/public/employee")
+	@PostMapping("/add")
     public Employee  createEmployee(@RequestBody Employee employee) throws ServiceException {
         return employeeService.saveEmployee(employee);
     }
 	
-	@PostMapping("/api/public/employees")
+	@PostMapping("/import")
 	public List<Employee> importEployees(@RequestParam("file") MultipartFile file ){
 		return this.employeeService.importEmployee(file);
 	}
 	
 	
-	@GetMapping("/api/public/employees")
+	@GetMapping("/all")
 	public ApiResponse<List<Employee> >getEmployees( ){
 		
 		try {
@@ -48,4 +50,12 @@ public class EmployeeController {
 			return new ApiResponse(false, "failure", new ArrayList<>());
 		}
 	}
+	
+	@PutMapping("")
+	public ApiResponse<String> updateEmployee(@RequestBody Employee employee){
+		this.employeeService.updateEmployeeInformation(employee);
+		return new ApiResponse<String>(false, "failed", "Internal Server Error");
+	}
+	
+	
 }

@@ -2,6 +2,7 @@ package net.in.skylink.attendance.service;
 
 import org.springframework.stereotype.Service;
 
+import net.in.skylink.attendance.exceptions.ServiceException;
 import net.in.skylink.attendance.model.ZohoOAuthToken;
 import net.in.skylink.attendance.repository.ZohoOAuthTokenRepository;
 
@@ -27,7 +28,10 @@ public class ZohoOAuthService {
 	}
 	
 	
-	
+	public String getAccessToken() throws ServiceException {
+		ZohoOAuthToken singleToken=this.zohoOAuthTokenRepository.findById(1L).orElseThrow(()->new ServiceException("Access Token is Not Available"));
+		return singleToken.getAccessToken();
+	}
 	
 	
 	

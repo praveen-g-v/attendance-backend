@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.in.skylink.attendance.exceptions.ServiceException;
 import net.in.skylink.attendance.model.Employee;
 import net.in.skylink.attendance.repository.EmployeeRepository;
 
@@ -37,6 +38,30 @@ public class EmployeeService {
 	
 	public List<Employee> getEmployees(){
 		return this.employeeRepository.findAll();
+	}
+	
+	public Employee getEmployee(String empId) throws ServiceException {
+		return this.employeeRepository.findByEmployeeId(empId).orElseThrow(()->new ServiceException("Employee Data is not Available" +empId));
+	}
+	
+	public Employee updateEmployeeInformation(Employee employee) throws ServiceException {
+		Employee tempEmployee=this.employeeRepository.findById(employee.getId()).orElseThrow(()-> new ServiceException("Unable to find Employee Information"));
+		if(employee.getEmployeeId()!=""||employee.getEmployeeId()!=null) {
+			tempEmployee.setEmployeeId(employee.getEmployeeId());
+		}
+		if(employee.getDepartment()!=""||employee.getDepartment()!=null ) {
+			tempEmployee.setDepartment(employee.getDepartment());
+		}
+		if(employee.getDestination()!=""||employee.getDestination()!=null) {
+			tempEmployee.setDestination(employee.getDestination());
+		}
+		
+		if()
+		
+		tempEmployee.setContactNo(employee.getContactNo());
+		tempEmployee.
+		return tempEmployee;
+		
 	}
 	
 	private List<Employee>  readCsv(MultipartFile file) throws Exception {

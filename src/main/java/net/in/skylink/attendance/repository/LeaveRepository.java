@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
 
     Optional<Leave> findByZohoLeaveId(String zohoLeaveId);
+    
+    boolean existsByZohoLeaveId(String zohoLeaveId);
 }
 

@@ -27,6 +27,13 @@ public class ZohoOAuthToken {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+    
+    @Column(name="client_id",nullable=false)
+    private String clientId;
+    
+    @Column(name="client_secret",nullable=false)
+    private String clientSecret;
+    
 
 	public String getAccessToken() {
 		return accessToken;
@@ -63,11 +70,24 @@ public class ZohoOAuthToken {
 	public Long getId() {
 		return id;
 	}
-	
-	
 
-    // getters & setters
-    
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
+	}
+	
+	    
     
     
 }
